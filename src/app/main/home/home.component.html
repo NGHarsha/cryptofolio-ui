@@ -1,0 +1,29 @@
+<div *ngIf="!isLoaded" class="layout" fxLayout="column" fxLayoutAlign="center ">
+  <div>
+    <div *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+      <mat-card class="skeleton-card">
+        <mat-card-content fxLayout="row" fxLayoutAlign=" center">
+          <p class="skeleton skeleton-text" fxFlex="2"></p>
+          <div fxFlex="20" class="asset">
+            <div class="asset__image skeleton"></div>
+            <div class="skeleton skeleton-text"></div>
+          </div>
+          <div fxFlex="20" class="skeleton skeleton-text"></div>
+          <div fxFlex="20" class="skeleton skeleton-text"></div>
+          <div fxFlex="20" class="skeleton skeleton-text"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="isLoaded"
+  class="layout"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div fxFill *ngFor="let coin of coins; let i = index">
+    <app-coin [isHomeCoin]="true" [coin]="coin" [rank]="i"></app-coin>
+  </div>
+</div>

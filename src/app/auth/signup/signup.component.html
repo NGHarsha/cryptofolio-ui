@@ -1,0 +1,60 @@
+<section class="signup-form">
+  <p class="mat-title">Sign Up</p>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="signupForm"
+  >
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Name"
+        name="name"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        name="email"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        name="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <div fxLayout="row" fxFill="100" fxLayoutAlign="space-between">
+      <p fxFlexAlign="end">
+        Already have an account ?
+        <span (click)="openSignInDialog()" class="mat-body1">Sign In</span>
+      </p>
+    </div>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="signupForm.invalid"
+    >
+      Sign up
+    </button>
+  </form>
+  <ngx-spinner
+    [fullScreen]="false"
+    bdColor="rgba(0,0,0,0.4)"
+    type="ball-clip-rotate-multiple"
+    size="medium"
+  >
+  </ngx-spinner>
+</section>

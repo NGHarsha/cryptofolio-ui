@@ -1,0 +1,100 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@import "../../../styles";
+
+.asset {
+  display: flex;
+  align-items: center;
+  &__image {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+
+  &__name {
+    margin: 0;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.dashboard-wrapper {
+  margin-top: 2rem;
+}
+
+.mat-button,
+.mat-raised-button {
+  line-height: 3rem;
+}
+
+.button-div {
+  text-align: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.news {
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: rgb(88 102 126 / 8%) 0px 4px 24px,
+    rgb(88 102 126 / 12%) 0px 1px 2px;
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 1rem;
+}
+
+.news-card {
+  height: 15rem;
+  box-shadow: none !important;
+  border: none;
+  &__srcimage {
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+  }
+
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__subtitle {
+    font-size: small;
+  }
+}
+
+.portfolio-head {
+  height: 4rem;
+  &__price {
+    font-size: 2.5rem;
+    font-weight: 900;
+  }
+}
+
+.asset {
+  display: flex;
+  align-items: center;
+  &__image {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+
+  &__name {
+    margin: 0;
+  }
+}

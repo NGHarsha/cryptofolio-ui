@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@import "../../../styles";
+
+.input {
+  width: 100%;
+}
+
+.section {
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-card {
+  box-shadow: none !important;
+  border: none;
+  cursor: pointer;
+  width: 75%;
+}

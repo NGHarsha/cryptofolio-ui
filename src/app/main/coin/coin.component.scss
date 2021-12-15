@@ -1,0 +1,23 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@import "../../../styles";
+
+.asset {
+  display: flex;
+  align-items: center;
+  &__image {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+  }
+
+  &__name {
+    margin: 0;
+  }
+}
+
+p {
+  margin: 0;
+}

@@ -1,0 +1,38 @@
+<section>
+  <div>
+    <p class="mat-title">Select Asset</p>
+
+    <mat-form-field appearance="legacy" class="input">
+      <input
+        type="text"
+        matInput
+        placeholder="Search Asset"
+        name="asset"
+        class="input__field"
+        (keyup)="handleChange($event)"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="section">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-card
+        class="coin-card custom-card"
+        *ngFor="let asset of assets"
+        (click)="openTransactionModel(asset)"
+      >
+        <mat-card-content fxLayout="row" fxLayoutAlign=" center">
+          <div class="asset">
+            <img
+              src="{{ asset.image }}"
+              class="asset__image"
+              alt="{{ asset.name }}"
+            />
+            <p class="asset__name">{{ asset.name }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<mat-card class="coin-card">
+  <mat-card-content *ngIf="isHomeCoin" fxLayout="row" fxLayoutAlign=" center">
+    <p fxFlex="5">{{ rank + 1 }}</p>
+    <div fxFlex="20" class="asset">
+      <img src="{{ coin.image }}" class="asset__image" alt="{{ coin.name }}" />
+      <p class="bold asset__name">{{ coin.name }}</p>
+    </div>
+    <p class="bold" fxFlex="20">${{ coin.current_price | number: "1.2-5" }}</p>
+    <p class="bold" fxFlex="20">${{ coin.market_cap | number }}</p>
+    <p class="bold" fxFlex="20">${{ coin.total_volume }}</p>
+  </mat-card-content>
+  <mat-card-content
+    *ngIf="isPortfolioCoin"
+    fxLayout="row"
+    fxLayoutAlign=" center"
+  >
+    <div fxFlex="20" class="asset">
+      <img
+        src="{{ transaction.image }}"
+        class="asset__image"
+        alt="{{ transaction.name }}"
+      />
+      <p class="bold asset__name">{{ transaction.name }}</p>
+    </div>
+    <p class="bold" fxFlex="20">{{ transaction.volume | number: "1.2-5" }}</p>
+    <p class="bold" fxFlex="20">{{ transaction.value }}</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,14 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-body1 {
+  color: blue;
+  cursor: pointer;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

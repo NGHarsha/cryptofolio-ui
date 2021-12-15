@@ -1,0 +1,23 @@
+@use "@angular/material" as mat;
+@import "../../../styles";
+
+.navbar {
+  width: 75%;
+  margin: 0 auto;
+  height: 5rem;
+
+  &__logo {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__link {
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      color: mat.get-color-from-palette($primary-palette, "darker");
+      text-decoration: none;
+    }
+  }
+}

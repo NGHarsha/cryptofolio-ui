@@ -1,0 +1,16 @@
+button {
+  margin-top: 1rem;
+}
+
+.custom-card {
+  box-shadow: none !important;
+  border: none;
+
+  &__avatar {
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}

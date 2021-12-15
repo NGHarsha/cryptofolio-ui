@@ -1,0 +1,92 @@
+<div *ngIf="!isLoaded">
+  <p>Loading......</p>
+</div>
+<div *ngIf="isLoaded">
+  <div fxLayout="row" class="layout dashboard-wrapper" fxLayoutGap="1rem">
+    <div fxFlex="30" class="news">
+      <div fxLayout="column">
+        <mat-card *ngFor="let n of news; let i = index" class="news-card">
+          <mat-card-subtitle>
+            {{ timeSince(n.published_at) }}
+          </mat-card-subtitle>
+          <mat-card-content fxLayout="row" fxLayoutGap="1rem">
+            <div fxFlex="30" class="news-card__image">
+              <img src="{{ getRandomImage(i) }}" class="news-card__srcimage" />
+            </div>
+            <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between">
+              <p class="news-card__text">{{ n.title }}</p>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <a class="news-card__subtitle" href="{{ n.url }}"
+                  >Discuss on CryptoPanic</a
+                >
+                <!-- <mat-card-subtitle>{{ n.published_at }}</mat-card-subtitle> -->
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxFlex="70">
+      <div fxLayout="column" fxLayoutGap="1rem">
+        <div
+          class="portfolio-head"
+          flexLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div>
+            <p class="portfolio-head__price">
+              {{ selectedPortfolio.investment }}
+              No of Assets {{ selectedPortfolio.transactions.length }}
+            </p>
+          </div>
+          <div>
+            <button mat-raised-button color="primary">Add Portfolio</button>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center">
+          <mat-card>
+            <mat-card-content fxLayout="row" fxLayoutAlign=" center">
+              <div fxFlex="20" class="asset">
+                <p class="asset__name">Asset</p>
+              </div>
+              <p fxFlex="20">Volume</p>
+              <p fxFlex="20">Investment</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card
+            *ngFor="
+              let transaction of selectedPortfolio?.transactions;
+              let i = index
+            "
+          >
+            <mat-card-content fxLayout="row" fxLayoutAlign=" center">
+              <div fxFlex="20" class="asset">
+                <img
+                  src="{{ transaction.image }}"
+                  class="asset__image"
+                  alt="{{ transaction.name }}"
+                />
+                <p class="bold asset__name">{{ transaction.name }}</p>
+              </div>
+              <p class="bold" fxFlex="20">
+                {{ transaction.volume | number: "1.2-5" }}
+              </p>
+              <p class="bold" fxFlex="20">{{ transaction.value }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="button-div">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openSearchCoinModel()"
+        >
+          Add Asset
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

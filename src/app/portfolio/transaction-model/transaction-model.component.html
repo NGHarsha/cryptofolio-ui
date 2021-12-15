@@ -1,0 +1,64 @@
+<section>
+  <mat-card class="custom-card">
+    <div fxLayout="row" fxLayoutGap="1rem">
+      <img [src]="data.image" class="custom-card__avatar" />
+      <div fxLayout="column">
+        <mat-card-title>{{ data.name }}</mat-card-title>
+        <mat-card-subtitle>{{ data.symbol.toUpperCase() }}</mat-card-subtitle>
+      </div>
+    </div>
+    <mat-card-content>
+      <form
+        fxLayout="column"
+        fxLayoutAlign=" center"
+        (ngSubmit)="onSubmit()"
+        [formGroup]="transactionForm"
+      >
+        <mat-form-field appearance="outline">
+          <input
+            type="text"
+            matInput
+            placeholder="Volume"
+            name="volume"
+            formControlName="volume"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input
+            type="text"
+            matInput
+            placeholder="At Price"
+            name="atprice"
+            formControlName="atprice"
+          />
+        </mat-form-field>
+
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          formControlName="type"
+          fxLayoutGap="1rem"
+        >
+          <mat-radio-button value="buy"> Bought </mat-radio-button>
+          <mat-radio-button value="sell"> Sold </mat-radio-button>
+        </mat-radio-group>
+
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="transactionForm.invalid"
+        >
+          Add
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<ngx-spinner
+  [fullScreen]="false"
+  bdColor="rgba(0,0,0,0.4)"
+  type="ball-clip-rotate-multiple"
+  size="medium"
+>
+</ngx-spinner>

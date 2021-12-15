@@ -1,0 +1,54 @@
+<section class="signin-form">
+  <p class="mat-title">Sign In</p>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="loginForm"
+  >
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        name="email"
+        email
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        name="password"
+        minlength="6"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <div fxLayout="row" fxFill="100" fxLayoutAlign="space-between">
+      <a (click)="onClick()" class="mat-body1">Forgot Password?</a>
+      <p fxFlexAlign="end">
+        New to CryptoFolio?
+        <span (click)="openSignUpDialog()" class="mat-body1">Sign Up</span>
+      </p>
+    </div>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="loginForm.invalid || isLoading"
+    >
+      Login
+    </button>
+  </form>
+  <ngx-spinner
+    [fullScreen]="false"
+    bdColor="rgba(0,0,0,0.4)"
+    type="ball-clip-rotate-multiple"
+    size="medium"
+  >
+  </ngx-spinner>
+</section>
