@@ -1,0 +1,40 @@
+.news-card {
+  height: 15rem;
+  box-shadow: none !important;
+  border: none;
+  &__srcimage {
+    width: 100%;
+    height: 10rem;
+    border-radius: 1rem;
+  }
+
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__subtitle {
+    font-size: small;
+  }
+}
+
+.news-content {
+  position: inherit;
+}
+.save-icon {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.news-card:hover {
+  .save-icon {
+    visibility: visible;
+    color: blue;
+  }
+}

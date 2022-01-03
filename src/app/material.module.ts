@@ -19,6 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatPaginatorModule,
     MatSnackBarModule,
     MatRadioModule,
+    MatTooltipModule,
   ],
   exports: [
     MatButtonModule,
@@ -64,6 +66,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatPaginatorModule,
     MatSnackBarModule,
     MatRadioModule,
+    MatTooltipModule,
   ],
 })
 export class MaterialModule {}

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, mergeMap, map } from 'rxjs/operators';
-import { CoinService } from 'src/app/main/services/coin.service';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { NewsService } from 'src/app/news/news.service';
-
 import * as NewsActions from '../actions/news.actions';
 
 @Injectable()

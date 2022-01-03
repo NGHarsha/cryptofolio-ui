@@ -6,4 +6,7 @@ export interface Portfolio {
   transactions: Transaction[];
   id: string;
   isPrimary: boolean;
+  balance: number;
+  bestPerformer: Transaction;
+  worstPerformer: Transaction;
 }

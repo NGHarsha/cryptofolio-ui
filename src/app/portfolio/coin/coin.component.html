@@ -1,0 +1,43 @@
+<mat-card class="coin-card">
+  <mat-card-content fxLayout="row" fxLayoutAlign=" center">
+    <div fxFlex="20" class="asset">
+      <img src="{{ temp.image }}" class="asset__image" alt="{{ temp.name }}" />
+      <p class="bold asset__name">{{ temp.name }}</p>
+    </div>
+    <p class="bold" fxFlex="10">
+      ${{ (temp.current_price | number: "1.2-5") || "--" }}
+    </p>
+    <p
+      class="bold"
+      fxFlex="10"
+      [ngClass]="temp.price_change_percentage_24h > 0 ? 'raising' : 'falling'"
+    >
+      {{ (temp.price_change_percentage_24h | number: "1.2-2") || "--" }}
+    </p>
+    <div
+      fxFlex="20"
+      fxLayout="column"
+      fxLayoutGap="0.5rem"
+      fxLayoutAlign="center "
+    >
+      <p class="bold">${{ (temp.value | number: "1.2-2") || "--" }}</p>
+      <p mat-card-subtitle>{{ temp.volume }} {{ temp.symbol }}</p>
+    </div>
+    <p class="bold" fxFlex="20">
+      {{ temp.investment | number: "1.2-2" }}
+    </p>
+    <p
+      class="bold"
+      [ngClass]="temp.pandl > 0 ? 'raising' : 'falling'"
+      fxFlex="20"
+    >
+      ${{ (temp.pandl | number: "1.2-2") || "--" }}
+    </p>
+    <mat-icon
+      fxFlex="20"
+      class="delete-icon"
+      (click)="openConfirmationModel(temp)"
+      >delete</mat-icon
+    >
+  </mat-card-content>
+</mat-card>

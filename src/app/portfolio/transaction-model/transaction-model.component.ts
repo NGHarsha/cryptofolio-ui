@@ -1,13 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Coin } from 'src/app/shared/models/Coin';
-import { isThisTypeNode } from 'typescript';
-import { PortfolioService } from '../portfolio.service';
 import * as fromRoot from '../../app.reducer';
 import * as portfolioActions from '../../shared/state-management/actions/portfolio.actions';
-import { Store } from '@ngrx/store';
+import { PortfolioService } from '../portfolio.service';
 
 @Component({
   selector: 'app-transaction-model',
@@ -16,6 +15,7 @@ import { Store } from '@ngrx/store';
 })
 export class TransactionModelComponent implements OnInit {
   transactionForm: FormGroup;
+  currentPrice: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Coin,
@@ -31,20 +31,38 @@ export class TransactionModelComponent implements OnInit {
       atprice: new FormControl('', [Validators.required, Validators.min(0)]),
       type: new FormControl('buy', [Validators.required]),
     });
+
+    this.store.select(fromRoot.getCoins).subscribe((data) => {
+      data.forEach((c) => {
+        if (c.name === this.data.name) {
+          this.currentPrice = c.current_price;
+        }
+      });
+    });
   }
 
   onSubmit() {
     this.spinner.show();
+    let portfolioId: any;
+    this.store
+      .select(fromRoot.getSelectedPortfolio)
+      .subscribe((data) => (portfolioId = data?.id!));
     this.portfolioService
-      .addTransactionByPortfolioId(this.data, this.transactionForm.value)
+      .addTransactionByPortfolioId(
+        this.data,
+        this.transactionForm.value,
+        portfolioId
+      )
       .subscribe(
         (res) => {
-          this.store.dispatch(new portfolioActions.fetchPortfolios());
+          this.store.dispatch(
+            new portfolioActions.populatePortfolio(portfolioId)
+          );
           this.dialogRef.close(res);
           this.spinner.hide();
         },
         (err) => {
-          console.log(err);
+          //console.log(err);
           this.spinner.hide();
         }
       );

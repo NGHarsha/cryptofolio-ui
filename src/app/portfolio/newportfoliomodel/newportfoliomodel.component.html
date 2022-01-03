@@ -1,0 +1,38 @@
+<section>
+  <mat-card-title>Add Portfolio</mat-card-title>
+  <mat-card-content>
+    <form
+      fxLayout="column"
+      fxLayoutAlign=" center"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="transactionForm"
+    >
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          placeholder="Portfolio Name"
+          name="name"
+          formControlName="name"
+        />
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="transactionForm.invalid"
+      >
+        Add
+      </button>
+    </form>
+  </mat-card-content>
+</section>
+
+<ngx-spinner
+  [fullScreen]="false"
+  bdColor="rgba(0,0,0,0.4)"
+  type="ball-clip-rotate-multiple"
+  size="medium"
+>
+</ngx-spinner>

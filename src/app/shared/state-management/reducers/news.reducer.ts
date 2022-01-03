@@ -27,7 +27,7 @@ export function newsReducer(state = initialState, action: AppActions) {
         loading: true,
       };
     case FETCH_PORTFOLIO_NEWS_SUCCESS:
-      console.log(action.payload);
+      //console.log(action.payload);
       return {
         loading: false,
         loaded: true,

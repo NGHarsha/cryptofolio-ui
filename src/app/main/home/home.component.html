@@ -17,13 +17,24 @@
   </div>
 </div>
 
-<div
-  *ngIf="isLoaded"
-  class="layout"
-  fxLayout="column"
-  fxLayoutAlign="center center"
->
+<div *ngIf="isLoaded" class="layout" fxLayout="column">
+  <mat-card [ngStyle]="{ 'border-radius': 0 }">
+    <div fxLayout="row" fxLayoutAlign=" center">
+      <p fxFlex="5">#</p>
+      <p class="th" fxFlex="20">Name</p>
+      <p class="th" fxFlex="20">Price</p>
+      <p class="th" fxFlex="10">24h %</p>
+      <p class="th" fxFlex="20">Market Cap</p>
+      <p class="th" fxFlex="20">Volume (24h)</p>
+      <p class="th" fxFlex="20">Circulating Supply</p>
+    </div>
+  </mat-card>
   <div fxFill *ngFor="let coin of coins; let i = index">
-    <app-coin [isHomeCoin]="true" [coin]="coin" [rank]="i"></app-coin>
+    <app-coin
+      id="coin{{ i }}"
+      [isHomeCoin]="true"
+      [coin]="coin"
+      [rank]="i"
+    ></app-coin>
   </div>
 </div>

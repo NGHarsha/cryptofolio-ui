@@ -1,1 +1,44 @@
-<p>portfolio-news works!</p>
+<div *ngIf="!isPortfolioLoaded && !isLoaded && !imagesLoaded" fxLayout="column">
+  <div *ngFor="let number of [0, 1, 2, 3]">
+    <mat-card class="skeleton-card news-card">
+      <mat-card-content fxLayout="row" fxLayoutGap="1rem">
+        <div fxFlex="30">
+          <div class="news-card__srcimage skeleton"></div>
+        </div>
+        <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between">
+          <div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-last-text"></div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="30" class="skeleton skeleton-text"></div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div *ngIf="isPortfolioLoaded && isLoaded && imagesLoaded" fxLayout="column">
+  <mat-card *ngFor="let n of news; let i = index" class="news-card">
+    <mat-card-subtitle>
+      {{ timeSince(n.published_at) }}
+    </mat-card-subtitle>
+    <mat-card-content fxLayout="row" fxLayoutGap="1rem" class="news-content">
+      <div fxFlex="30" class="news-card__image">
+        <img src="{{ getRandomImage(i) }}" class="news-card__srcimage" />
+      </div>
+      <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between">
+        <p class="news-card__text">{{ n.title }}</p>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <a class="news-card__subtitle" href="{{ n.url }}"
+            >Discuss on CryptoPanic</a
+          >
+        </div>
+      </div>
+      <!-- <mat-icon matTooltip="Save" (click)="saveNews(n)" class="save-icon"
+        >bookmark_border</mat-icon
+      > -->
+    </mat-card-content>
+  </mat-card>
+</div>

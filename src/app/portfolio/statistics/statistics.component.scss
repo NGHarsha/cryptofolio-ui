@@ -1,0 +1,26 @@
+.portfolio-head {
+  height: 8rem;
+}
+
+.select-form {
+  width: 10rem;
+  font-weight: 600;
+}
+
+.balance {
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  border-radius: 0.8rem;
+  &__price {
+    margin: 0;
+  }
+}
+
+.green {
+  background-color: #16c784;
+}
+
+.red {
+  background-color: #ea3943;
+}

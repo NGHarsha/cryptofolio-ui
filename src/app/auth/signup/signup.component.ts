@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -46,12 +45,18 @@ export class SignupComponent implements OnInit {
     this.authService.performAuth('signup', email, password, name).subscribe(
       (res) => {
         this.dialogRef.close(res.body);
+        this.snackBar.open('Signup Success', '', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: 'success-snack',
+          duration: 5000,
+        });
         this.authService.saveUser(res.body);
         this.authService.getUser();
         this.spinner.hide();
       },
       (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.snackBar.open(err.message, '', {
           horizontalPosition: 'center',
           verticalPosition: 'top',
@@ -64,7 +69,7 @@ export class SignupComponent implements OnInit {
   }
 
   onClick() {
-    console.log('Clicked');
+    //console.log('Clicked');
   }
 
   openSignInDialog() {
@@ -73,7 +78,7 @@ export class SignupComponent implements OnInit {
       panelClass: 'dialog-class',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      //console.log(result);
     });
   }
 }

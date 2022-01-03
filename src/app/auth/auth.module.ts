@@ -4,10 +4,16 @@ import { SharedModule } from '../shared/shared.module';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [SigninComponent, SignupComponent],
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    JwtModule,
+  ],
 })
 export class AuthModule {}

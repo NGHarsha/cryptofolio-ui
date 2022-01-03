@@ -1,0 +1,17 @@
+<!-- <mat-card-content>
+  <p>By deleting all transactions of this asset will be deleted</p>
+</mat-card-content>
+<mat-card-actions>
+  <button mat-raised-button color="warn">Delete</button>
+</mat-card-actions> -->
+
+<h1 mat-dialog-title>Confirm Deletion</h1>
+<div mat-dialog-content>
+  <p>By confirming all transactions of this asset will be deleted too</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onClick('yes')" color="warn">
+    Delete
+  </button>
+  <button mat-button (click)="onClick('no')" cdkFocusInitial>Cancel</button>
+</div>

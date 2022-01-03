@@ -12,6 +12,8 @@ export const POPULATE_PORTFOLIO_FAILURE =
 export const CHANGE_SELECTED_PORTFOLIO =
   '[Portfolio] Change Selected Portfolio';
 
+export const UPDATE_STATISTICS = '[Portfolio] Update Statistics';
+
 export class fetchPortfolios implements Action {
   readonly type = FETCH_PORTFOLIOS;
 }
@@ -28,7 +30,7 @@ export class fetchPortfoliosFailure implements Action {
 
 export class populatePortfolio implements Action {
   readonly type = POPULATE_PORTFOLIO;
-  constructor(public payload: any) {}
+  constructor(public payload?: any) {}
 }
 
 export class populatePortfolioSuccess implements Action {
@@ -46,6 +48,11 @@ export class changeSelectedPortfolio implements Action {
   constructor(public payload: any) {}
 }
 
+export class updateStatistics implements Action {
+  readonly type = UPDATE_STATISTICS;
+  constructor(public payload: any) {}
+}
+
 export type PortfolioActions =
   | fetchPortfolios
   | fetchPortfoliosSuccess
@@ -53,4 +60,5 @@ export type PortfolioActions =
   | populatePortfolio
   | populatePortfolioSuccess
   | populatePortfolioFailure
-  | changeSelectedPortfolio;
+  | changeSelectedPortfolio
+  | updateStatistics;

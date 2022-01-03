@@ -1,4 +1,6 @@
-export interface Transaction {
+import { Coin } from './Coin';
+
+export interface Transaction extends Coin {
   value: number;
   volume: number;
   name: string;
@@ -7,4 +9,5 @@ export interface Transaction {
   portfolio: string;
   investment: number;
   atprice: number;
+  pandl: number;
 }

@@ -1,0 +1,39 @@
+<div
+  class="portfolio-head"
+  flexLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <div *ngIf="selectedPortfolio.transactions.length > 0">
+    <div fxLayout="column">
+      <p>Current Balance</p>
+      <div
+        class="balance"
+        [ngClass]="selectedPortfolio.investment > balance ? 'red' : 'green'"
+      >
+        <p class="balance__price">
+          {{ (balance | number: "1.2-2" | currency: "USD") || "-/-" }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="select-block">
+    <mat-form-field class="select-form">
+      <mat-select
+        [value]="selectedPortfolio.name"
+        (valueChange)="changePortfolio($event)"
+      >
+        <mat-option
+          *ngFor="let portfolio of portfolios"
+          [value]="portfolio.name"
+        >
+          {{ portfolio.name }}
+        </mat-option>
+        <div class="select-button">
+          <button mat-button color="primary" (click)="openNewPortfolioModel()">
+            Add Portfolio
+          </button>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

@@ -1,23 +1,21 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import * as fromRoot from '../app.reducer';
 import { AuthService } from '../auth/auth.service';
+import { Coin } from '../shared/models/Coin';
 import { Portfolio } from '../shared/models/Portfolio';
 import { Transaction } from '../shared/models/Transaction';
-import * as fromRoot from '../app.reducer';
-import { Store } from '@ngrx/store';
-import { Coin } from '../shared/models/Coin';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PortfolioService {
-  portfolioUrl: string =
-    'https://cryptofolio-server.herokuapp.com/api/portfolio';
-  transactionUrl: string =
-    'https://cryptofolio-server.herokuapp.com/api/transactions/portfolio';
+  portfolioUrl: string = 'http://localhost:5000/api/portfolio';
+  transactionUrl: string = 'http://localhost:5000/api/transactions/portfolio';
   unsplashUrl: string = `https://api.unsplash.com/search/photos?query=crypto&client_id=${environment.unsplashAPI}`;
 
   constructor(
@@ -28,43 +26,34 @@ export class PortfolioService {
 
   fetchPortfolios() {
     let user = this.authService.getUser();
-    console.log(user.userId);
+    //console.log(user.userId);
     return this.httpClient.get(`${this.portfolioUrl}/user/${user.userId}`);
   }
 
-  populatePortfolio(response: any) {
-    // console.log(response);
-    const primaryPortfolio = response.portfolios.find(
-      (p: Portfolio) => p.isPrimary
-    );
-    let temp: Portfolio[] = response.portfolios;
+  populatePortfolio(pid?: any) {
+    //console.log(pid);
+    //console.log(response);
+    let url;
+    if (pid) {
+      url = `${this.transactionUrl}/${pid}`;
+    } else {
+      url = this.transactionUrl;
+    }
+    //console.log('Populate service', pid);
 
-    return this.httpClient
-      .get<{ transactions: Transaction[] }>(
-        `${this.transactionUrl}/${primaryPortfolio.id}`
-      )
-      .pipe(
-        map((res) => {
-          return (response = temp.map((p: Portfolio) => {
-            if (p.isPrimary) {
-              return {
-                ...p,
-                transactions: res.transactions,
-              };
-            } else {
-              return p;
-            }
-          }));
-        })
-      );
+    // const primaryPortfolio = response.portfolios.find(
+    //   (p: Portfolio) => p.isPrimary
+    // );
+    // let temp: Portfolio[] = response.portfolios;
+
+    return this.httpClient.get<{ portfolio: Portfolio }>(url).pipe(
+      map((res) => res.portfolio),
+      catchError((error) => throwError(error))
+    );
   }
 
-  addTransactionByPortfolioId(asset: Coin, transaction: any) {
+  addTransactionByPortfolioId(asset: Coin, transaction: any, portfolioId: any) {
     let user = this.authService.getUser();
-    let portfolioId;
-    this.store
-      .select(fromRoot.getPortfolios)
-      .subscribe((data) => (portfolioId = data.selectedPortfolio));
     let investment = transaction.volume * transaction.atprice;
     return this.httpClient
       .post<{ portfolio: Portfolio }>(`${this.portfolioUrl}/${portfolioId}`, {
@@ -77,6 +66,28 @@ export class PortfolioService {
         investment,
       })
       .pipe(catchError((error) => throwError(error.error)));
+  }
+
+  deleteTransactionByPortfolioId(data: Transaction) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: data,
+    };
+    return this.httpClient
+      .delete(`${this.portfolioUrl}/${data.portfolio}`, options)
+      .pipe(catchError((error) => throwError(error.error)));
+  }
+
+  addPortfolio(data: any) {
+    let user = this.authService.getUser();
+    //console.log(user);
+    //console.log(data);
+    return this.httpClient.post(
+      `${this.portfolioUrl}/user/${user.userId}`,
+      data
+    );
   }
 
   getNewsImages() {

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Coin } from 'src/app/shared/models/Coin';
 import * as fromRoot from '../../app.reducer';
 import { TransactionModelComponent } from '../transaction-model/transaction-model.component';
+import * as coinActions from '../../shared/state-management/actions/coin.actions';
 
 @Component({
   selector: 'app-searchcoinmodel',
@@ -13,6 +14,7 @@ import { TransactionModelComponent } from '../transaction-model/transaction-mode
 export class SearchcoinmodelComponent implements OnInit {
   coins: Coin[];
   assets: Coin[] | undefined;
+  isLoaded: boolean;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -22,10 +24,15 @@ export class SearchcoinmodelComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(fromRoot.getCoinState).subscribe((data) => {
+      this.isLoaded = data.loaded;
       this.coins = data.coins;
       this.assets = this.coins;
-      console.log(this.assets);
     });
+
+    if (!this.isLoaded) {
+      //console.log('Dispatching from search model');
+      this.store.dispatch(new coinActions.FetchCoins());
+    }
   }
 
   handleChange(term: any) {
@@ -45,7 +52,7 @@ export class SearchcoinmodelComponent implements OnInit {
       data: asset,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      //console.log(result);
     });
   }
 }

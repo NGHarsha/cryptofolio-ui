@@ -1,11 +1,10 @@
-import { Action } from '@ngrx/store';
 import { Coin } from '../../models/Coin';
 import { AppActions } from '../actions';
 import {
-  CoinActions,
   FETCH_COINS,
   FETCH_COINS_FAILURE,
   FETCH_COINS_SUCCESS,
+  UPDATE_COIN,
 } from '../actions/coin.actions';
 
 export interface State {
@@ -28,7 +27,7 @@ export function coinReducer(state = initialState, action: AppActions) {
         loading: true,
       };
     case FETCH_COINS_SUCCESS:
-      console.log(action.payload);
+      //console.log(action.payload);
       return {
         loading: false,
         loaded: true,
@@ -39,6 +38,17 @@ export function coinReducer(state = initialState, action: AppActions) {
         ...state,
         loading: false,
         loaded: false,
+      };
+    case UPDATE_COIN:
+      let temp = state.coins.map((coin) => {
+        if (coin.symbol === action.payload.symbol) {
+          return action.payload;
+        }
+        return coin;
+      });
+      return {
+        ...state,
+        coins: temp,
       };
     default:
       return state;
