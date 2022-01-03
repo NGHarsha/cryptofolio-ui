@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class NewsService {
-  url = 'http://localhost:5000/api/news';
+  url = 'https://cryptofolio-server.herokuapp.com/api/news';
   unsplashUrl: string = `https://api.unsplash.com/search/photos?query=crypto&client_id=${environment.unsplashAPI}`;
 
   constructor(private httpClient: HttpClient) {}

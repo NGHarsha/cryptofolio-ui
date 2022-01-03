@@ -11,8 +11,8 @@ const jwtHelper = new JwtHelperService();
   providedIn: 'root',
 })
 export class AuthService {
-  signInURL = 'http://localhost:5000/api/users/login';
-  signUpUrl = 'http://localhost:5000/api/users/signup';
+  signInURL = 'https://cryptofolio-server.herokuapp.com/api/users/login';
+  signUpUrl = 'https://cryptofolio-server.herokuapp.com/api/users/signup';
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 

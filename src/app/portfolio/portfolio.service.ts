@@ -14,8 +14,10 @@ import { Transaction } from '../shared/models/Transaction';
   providedIn: 'root',
 })
 export class PortfolioService {
-  portfolioUrl: string = 'http://localhost:5000/api/portfolio';
-  transactionUrl: string = 'http://localhost:5000/api/transactions/portfolio';
+  portfolioUrl: string =
+    'https://cryptofolio-server.herokuapp.com/api/portfolio';
+  transactionUrl: string =
+    'https://cryptofolio-server.herokuapp.com/api/transactions/portfolio';
   unsplashUrl: string = `https://api.unsplash.com/search/photos?query=crypto&client_id=${environment.unsplashAPI}`;
 
   constructor(
